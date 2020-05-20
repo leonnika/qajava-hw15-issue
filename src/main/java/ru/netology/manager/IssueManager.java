@@ -84,7 +84,7 @@ public class IssueManager {
     }
 
     public List<Issue> getAllIssue() {
-        // Collections.sort(repository.getAll(), Collections.reverseOrder());
+        Collections.sort(repository.getAll(), Collections.reverseOrder());
         return repository.getAll();
     }
 
