@@ -6,6 +6,7 @@ import ru.netology.repository.IssueRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 
 public class IssueManager {
@@ -42,13 +43,40 @@ public class IssueManager {
     }
 
 
-    public void filterByAuthor() {
+    public List<Issue> filterByAuthor(String author) {
+        List<Issue> result = new ArrayList<>();
+        Predicate<String> predicate = x -> x == author;
+        for (Issue item : repository.getAll()) {
+            if (predicate.test(item.getAuthor())) {
+                result.add(item);
+            }
+        }
+        return result;
     }
 
-    public void filterByLabel() {
+    public List<Issue> filterByLabel(String label) {
+        List<Issue> result = new ArrayList<>();
+        Predicate<String> predicate = x -> x == label;
+
+        for (Issue item : repository.getAll()) {
+            for (String itemLabel : item.getLabel())
+                if (predicate.test(itemLabel)) {
+                    result.add(item);
+                }
+        }
+        return result;
     }
 
-    public void filterByAssignee() {
+    public List<Issue> filterByAssignee(String assignee) {
+        List<Issue> result = new ArrayList<>();
+        Predicate<String> predicate = x -> x == assignee;
+        for (Issue item : repository.getAll()) {
+            for (String itemAssignee : item.getAssignee())
+                if (predicate.test(itemAssignee)) {
+                    result.add(item);
+                }
+        }
+        return result;
     }
 
     public void sortById() {
@@ -71,6 +99,4 @@ public class IssueManager {
             }
         }
     }
-
-
 }

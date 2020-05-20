@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domain.Issue;
 import ru.netology.repository.IssueRepository;
 
-
-import java.util.Comparator;
 import java.util.HashSet;
 
 class IssueManagerTest {
@@ -67,11 +65,44 @@ class IssueManagerTest {
     }
 
     @Test
-    void shouldupdateById() {
+    void shouldUpdateByIdForFalse() {
         manager.addIssue(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
         manager.addIssue(new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel));
         manager.addIssue(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel));
         manager.updateById(7);
         System.out.println("Test for updateById, expected issue(id 1), issue(id 7), issue(id 3), actual: " + manager.getAllIssue());
+    }
+
+    @Test
+    void shouldUpdateByIdForTrue() {
+        manager.addIssue(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
+        manager.addIssue(new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel));
+        manager.addIssue(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel));
+        manager.updateById(1);
+        System.out.println("Test for updateById, expected issue(id 1), issue(id 7), issue(id 3), actual: " + manager.getAllIssue());
+    }
+
+    @Test
+    void shouldFilterByAuthor() {
+        manager.addIssue(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
+        manager.addIssue(new Issue(7, "Не соответствие типов", "Сидоров Семён", "24.05.2020", false, "", secondAssigneeSet, secondLabel));
+        manager.addIssue(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel));
+        System.out.println("Test for filterByAuthor, expected issue(id 7), issue(id 3) actual: " + manager.filterByAuthor("Сидоров Семён"));
+    }
+
+    @Test
+    void shouldFilterByLabel() {
+        manager.addIssue(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
+        manager.addIssue(new Issue(7, "Не соответствие типов", "Сидоров Семён", "24.05.2020", false, "", secondAssigneeSet, secondLabel));
+        manager.addIssue(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel));
+        System.out.println("Test for filterByLabel, expected issue(id 3) actual: " + manager.filterByLabel("dublicat"));
+    }
+
+    @Test
+    void shouldFilterByAssignee() {
+        manager.addIssue(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
+        manager.addIssue(new Issue(7, "Не соответствие типов", "Сидоров Семён", "24.05.2020", false, "", secondAssigneeSet, secondLabel));
+        manager.addIssue(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel));
+        System.out.println("Test for filterByAssignee, expected issue(id 7),issue(id 3) actual: " + manager.filterByAssignee("Иванов Иван Иванович"));
     }
 }
