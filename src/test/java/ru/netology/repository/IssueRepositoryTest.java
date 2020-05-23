@@ -87,18 +87,18 @@ class IssueRepositoryTest {
         assertEquals(expected, repository.getAll());
     }
 
-@Test
-    void shouldCloseSetIfClose(){
-    List<Issue> expected = new ArrayList<>();
-    List<Issue> actual = new ArrayList<>();
-    expected.add(new Issue(2, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel));
-    repository.closeSet(2);
-    actual.add(repository.getById(2));
-    assertEquals(expected, actual);
-}
+    @Test
+    void shouldCloseSetIfClose() {
+        List<Issue> expected = new ArrayList<>();
+        List<Issue> actual = new ArrayList<>();
+        expected.add(new Issue(2, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel));
+        repository.closeSet(2);
+        actual.add(repository.getById(2));
+        assertEquals(expected, actual);
+    }
 
     @Test
-    void shouldCloseSetIfOpen(){
+    void shouldCloseSetIfOpen() {
         List<Issue> expected = new ArrayList<>();
         List<Issue> actual = new ArrayList<>();
         expected.add(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", false, "20.05.2020", thirdAssigneeSet, thirdLabel));
@@ -108,7 +108,7 @@ class IssueRepositoryTest {
     }
 
     @Test
-    void shouldOpenSetIfClose(){
+    void shouldOpenSetIfClose() {
         List<Issue> expected = new ArrayList<>();
         List<Issue> actual = new ArrayList<>();
         expected.add(new Issue(2, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", true, "", secondAssigneeSet, secondLabel));
@@ -118,7 +118,7 @@ class IssueRepositoryTest {
     }
 
     @Test
-    void shouldOpenSetIfOpen(){
+    void shouldOpenSetIfOpen() {
         List<Issue> expected = new ArrayList<>();
         List<Issue> actual = new ArrayList<>();
         expected.add(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel));
@@ -126,5 +126,4 @@ class IssueRepositoryTest {
         actual.add(repository.getById(3));
         assertEquals(expected, actual);
     }
-
 }

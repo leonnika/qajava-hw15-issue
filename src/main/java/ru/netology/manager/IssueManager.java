@@ -97,17 +97,12 @@ public class IssueManager {
     }
 
     public void deleteById(int id) {
-        Iterator<Issue> issueIterator =repository.getAll().iterator();
-        while (issueIterator.hasNext()){
-            Issue nextIssue=issueIterator.next();
-            if (nextIssue.getId()==id){
+        Iterator<Issue> issueIterator = repository.getAll().iterator();
+        while (issueIterator.hasNext()) {
+            Issue nextIssue = issueIterator.next();
+            if (nextIssue.getId() == id) {
                 issueIterator.remove();
             }
         }
-//        for (Issue item : repository.getAll()) {
-//            if ((item.getId() == id)) {
-//                repository.remove(item);
-//            }
-//             }
-           }
+    }
 }

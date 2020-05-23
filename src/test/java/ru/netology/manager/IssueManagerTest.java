@@ -1,6 +1,5 @@
 package ru.netology.manager;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -31,19 +30,19 @@ class IssueManagerTest {
             expected.add(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
             manager.addIssue(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
             assertEquals(expected, manager.getAllIssue());
-            }
+        }
 
         @Test
         void shouldGetOpen() {
             List<Issue> expected = new ArrayList<>();
-            assertEquals(expected,manager.getOpen());
-            }
+            assertEquals(expected, manager.getOpen());
+        }
 
         @Test
         void shouldGetClose() {
             List<Issue> expected = new ArrayList<>();
             assertEquals(expected, manager.getClose());
-            }
+        }
 
 
         @Test
@@ -51,25 +50,25 @@ class IssueManagerTest {
             List<Issue> expected = new ArrayList<>();
             manager.updateById(7);
             assertEquals(expected, manager.getAllIssue());
-            }
+        }
 
         @Test
         void shouldFilterByAuthor() {
             List<Issue> expected = new ArrayList<>();
             assertEquals(expected, manager.filterByAuthor("Сидоров Семён"));
-            }
+        }
 
         @Test
         void shouldFilterByLabel() {
             List<Issue> expected = new ArrayList<>();
             assertEquals(expected, manager.filterByLabel("dublicat"));
-            }
+        }
 
         @Test
         void shouldFilterByAssignee() {
             List<Issue> expected = new ArrayList<>();
             assertEquals(expected, manager.filterByAssignee("Иванов Иван Иванович"));
-            }
+        }
 
         @Test
         void shouldDeleteById() {
@@ -94,30 +93,30 @@ class IssueManagerTest {
             List<Issue> expected = new ArrayList<>();
             expected.add(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
             assertEquals(expected, manager.getOpen());
-            }
+        }
 
         @Test
         void shouldGetClose() {
             List<Issue> expected = new ArrayList<>();
             expected.add(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", false, "26.04.2020", fistAssigneeSet, fistLabel));
             manager.updateById(1);
-            assertEquals(expected,manager.getClose());
-            }
+            assertEquals(expected, manager.getClose());
+        }
 
-       @Test
+        @Test
         void shouldUpdateByIdForOpen() {
-           List<Issue> expected = new ArrayList<>();
-           expected.add(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", false, "26.04.2020", fistAssigneeSet, fistLabel));
-           manager.updateById(1);
-           assertEquals(expected, manager.getAllIssue());
-       }
+            List<Issue> expected = new ArrayList<>();
+            expected.add(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", false, "26.04.2020", fistAssigneeSet, fistLabel));
+            manager.updateById(1);
+            assertEquals(expected, manager.getAllIssue());
+        }
 
         @Test
         void shouldFilterByAuthorIsIt() {
             List<Issue> expected = new ArrayList<>();
             expected.add(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
             assertEquals(expected, manager.filterByAuthor("Сидоров Семён Семёныч"));
-            }
+        }
 
         @Test
         void shouldFilterByAuthorIsNotIt() {
@@ -130,7 +129,7 @@ class IssueManagerTest {
             List<Issue> expected = new ArrayList<>();
             expected.add(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
             assertEquals(expected, manager.filterByLabel("bug"));
-            }
+        }
 
         @Test
         void shouldFilterByLabelIsNotIt() {
@@ -143,12 +142,12 @@ class IssueManagerTest {
             List<Issue> expected = new ArrayList<>();
             expected.add(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
             assertEquals(expected, manager.filterByAssignee("Александрова Александра Александровна"));
-            }
+        }
 
         @Test
         void shouldFilterByAssigneeIsNotIt() {
             List<Issue> expected = new ArrayList<>();
-          // expected.add(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
+            // expected.add(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
             assertEquals(expected, manager.filterByAssignee("Александрова Александра"));
         }
 
@@ -193,13 +192,13 @@ class IssueManagerTest {
         @Test
         void shouldGetOpen() {
             List<Issue> expected = new ArrayList<>();
-            expected.addAll(List.of(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel),new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel)));
+            expected.addAll(List.of(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel), new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel)));
             assertEquals(expected, manager.getOpen());
-            }
+        }
 
         @Test
         void shouldGetClose() {
-          List<Issue> expected = new ArrayList<>();
+            List<Issue> expected = new ArrayList<>();
             expected.add(new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel));
             assertEquals(expected, manager.getClose());
         }
@@ -207,16 +206,16 @@ class IssueManagerTest {
         @Test
         void shouldFilterByAuthorIsIt() {
             List<Issue> expected = new ArrayList<>();
-            expected.addAll(List.of(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel),new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel),new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel)));
+            expected.addAll(List.of(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel), new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel), new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel)));
             assertEquals(expected, manager.filterByAuthor("Сидоров Семён Семёныч"));
-            }
+        }
 
         @Test
         void shouldFilterByLabelIsIt() {
             List<Issue> expected = new ArrayList<>();
-            expected.addAll(List.of(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel),new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel),new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel)));
+            expected.addAll(List.of(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel), new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel), new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel)));
             assertEquals(expected, manager.filterByLabel("bug"));
-            }
+        }
 
         @Test
         void shouldFilterByAssigneeIsIt() {
@@ -228,7 +227,7 @@ class IssueManagerTest {
         @Test
         void shouldUpdateByIdForOpen() {
             List<Issue> expected = new ArrayList<>();
-            expected.addAll(List.of(new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", true, "", secondAssigneeSet, secondLabel), new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel),new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel)));
+            expected.addAll(List.of(new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", true, "", secondAssigneeSet, secondLabel), new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel), new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel)));
             manager.updateById(7);
             assertEquals(expected, manager.getAllIssue());
         }
@@ -236,7 +235,7 @@ class IssueManagerTest {
         @Test
         void shouldDeleteByCorrectId() {
             List<Issue> expected = new ArrayList<>();
-           expected.addAll(List.of( new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel),new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel)));
+            expected.addAll(List.of(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel), new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel)));
             manager.deleteById(7);
             assertEquals(expected, manager.getAllIssue());
         }
@@ -244,7 +243,7 @@ class IssueManagerTest {
         @Test
         void shouldDeleteByNoCorrectId() {
             List<Issue> expected = new ArrayList<>();
-            expected.addAll(List.of(new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel), new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel),new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel)));
+            expected.addAll(List.of(new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel), new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel), new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel)));
             manager.deleteById(70);
             assertEquals(expected, manager.getAllIssue());
         }
