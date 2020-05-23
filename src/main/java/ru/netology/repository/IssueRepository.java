@@ -34,6 +34,22 @@ public class IssueRepository {
         return this.items.addAll(items);
     }
 
+    public void openSet(int id) {
+        for (Issue item : items) {
+            if (item.getId() == id) {
+                item.setOpen(true);
+            }
+        }
+    }
+
+    public void closeSet(int id) {
+        for (Issue item : items) {
+            if (item.getId() == id) {
+                item.setOpen(false);
+            }
+        }
+    }
+
     public boolean removeAll(Collection<? extends Issue> items) {
         return this.items.removeAll(items);
     }

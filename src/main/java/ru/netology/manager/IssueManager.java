@@ -5,14 +5,13 @@ import ru.netology.repository.IssueRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
 
 public class IssueManager {
     private IssueRepository repository = new IssueRepository();
-
-    private List<Issue> items = new ArrayList<>();
 
     public IssueManager(IssueRepository repository) {
         this.repository = repository;
@@ -35,7 +34,7 @@ public class IssueManager {
     public List<Issue> getClose() {
         List<Issue> result = new ArrayList<>();
         for (Issue item : repository.getAll()) {
-            if (item.isOpen() == false) {
+            if (!item.isOpen()) {
                 result.add(item);
             }
         }
@@ -45,7 +44,7 @@ public class IssueManager {
 
     public List<Issue> filterByAuthor(String author) {
         List<Issue> result = new ArrayList<>();
-        Predicate<String> predicate = x -> x == author;
+        Predicate<String> predicate = x -> x.equalsIgnoreCase(author);
         for (Issue item : repository.getAll()) {
             if (predicate.test(item.getAuthor())) {
                 result.add(item);
@@ -56,7 +55,7 @@ public class IssueManager {
 
     public List<Issue> filterByLabel(String label) {
         List<Issue> result = new ArrayList<>();
-        Predicate<String> predicate = x -> x == label;
+        Predicate<String> predicate = x -> x.equalsIgnoreCase(label);
 
         for (Issue item : repository.getAll()) {
             for (String itemLabel : item.getLabel())
@@ -69,7 +68,7 @@ public class IssueManager {
 
     public List<Issue> filterByAssignee(String assignee) {
         List<Issue> result = new ArrayList<>();
-        Predicate<String> predicate = x -> x == assignee;
+        Predicate<String> predicate = x -> x.equalsIgnoreCase(assignee);
         for (Issue item : repository.getAll()) {
             for (String itemAssignee : item.getAssignee())
                 if (predicate.test(itemAssignee)) {
@@ -79,9 +78,6 @@ public class IssueManager {
         return result;
     }
 
-    public void sortById() {
-        Collections.sort(repository.getAll(), Collections.reverseOrder());
-    }
 
     public List<Issue> getAllIssue() {
         Collections.sort(repository.getAll(), Collections.reverseOrder());
@@ -92,11 +88,26 @@ public class IssueManager {
         for (Issue item : repository.getAll()) {
             if ((item.getId() == id)) {
                 if (item.isOpen()) {
-                    item.setOpen(false);
+                    repository.closeSet(id);
                 } else {
-                    item.setOpen(true);
+                    repository.openSet(id);
                 }
             }
         }
     }
+
+    public void deleteById(int id) {
+        Iterator<Issue> issueIterator =repository.getAll().iterator();
+        while (issueIterator.hasNext()){
+            Issue nextIssue=issueIterator.next();
+            if (nextIssue.getId()==id){
+                issueIterator.remove();
+            }
+        }
+//        for (Issue item : repository.getAll()) {
+//            if ((item.getId() == id)) {
+//                repository.remove(item);
+//            }
+//             }
+           }
 }
