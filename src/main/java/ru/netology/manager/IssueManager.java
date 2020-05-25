@@ -5,7 +5,6 @@ import ru.netology.repository.IssueRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -88,20 +87,10 @@ public class IssueManager {
         for (Issue item : repository.getAll()) {
             if ((item.getId() == id)) {
                 if (item.isOpen()) {
-                    repository.closeSet(id);
+                    repository.closeIssue(id);
                 } else {
-                    repository.openSet(id);
+                    repository.openIssue(id);
                 }
-            }
-        }
-    }
-
-    public void deleteById(int id) {
-        Iterator<Issue> issueIterator = repository.getAll().iterator();
-        while (issueIterator.hasNext()) {
-            Issue nextIssue = issueIterator.next();
-            if (nextIssue.getId() == id) {
-                issueIterator.remove();
             }
         }
     }

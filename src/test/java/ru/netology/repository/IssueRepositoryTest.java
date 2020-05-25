@@ -19,6 +19,11 @@ class IssueRepositoryTest {
     private HashSet<String> secondLabel = new HashSet<>();
     private HashSet<String> thirdAssigneeSet = new HashSet<>();
     private HashSet<String> thirdLabel = new HashSet<>();
+    private Issue issue1Open = new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel);
+    private Issue issue1Close = new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", false, "26.04.2020", fistAssigneeSet, fistLabel);
+    private Issue issue2 = new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel);
+    private Issue issue3 = new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel);
+
 
     @BeforeEach
     void init() {
@@ -34,16 +39,16 @@ class IssueRepositoryTest {
         thirdLabel.add("bag");
         thirdLabel.add("documentation");
         thirdLabel.add("dublicat");
-        repository.add(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
-        repository.add(new Issue(2, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel));
-        repository.add(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel));
+        repository.add(issue1Open);
+        repository.add(issue2);
+        repository.add(issue3);
     }
 
     @Test
     void shouldGetByCorrectId() {
         List<Issue> expected = new ArrayList<>();
         List<Issue> actual = new ArrayList<>();
-        expected.add(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel));
+        expected.add(issue3);
         actual.add(repository.getById(3));
         assertEquals(expected, actual);
     }
@@ -57,72 +62,46 @@ class IssueRepositoryTest {
     @Test
     void shouldGetAll() {
         List<Issue> expected = new ArrayList<>();
-        expected.addAll(List.of(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel), new Issue(2, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel), new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel)));
+        expected.addAll(List.of(issue1Open, issue2, issue3));
         assertEquals(expected, repository.getAll());
     }
 
     @Test
-    void shouldRemove() {
-        List<Issue> expected = new ArrayList<>();
-        expected.addAll(List.of(new Issue(2, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel), new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel)));
-        repository.remove(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
-        assertEquals(expected, repository.getAll());
-    }
-
-    @Test
-    void shouldAddAll() {
-        List<Issue> expected = new ArrayList<>();
-        expected.addAll(List.of(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel), new Issue(2, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel), new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel), new Issue(4, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel), new Issue(5, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel)));
-        List<Issue> issues = new ArrayList<>();
-        issues.add(new Issue(4, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel));
-        issues.add(new Issue(5, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel));
-        repository.addAll(issues);
-        assertEquals(expected, repository.getAll());
-    }
-
-    @Test
-    void shouldRemoveAll() {
-        List<Issue> expected = new ArrayList<>();
-        repository.removeAll(List.of(new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel), new Issue(2, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel), new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel)));
-        assertEquals(expected, repository.getAll());
-    }
-
-    @Test
-    void shouldCloseSetIfClose() {
+    void shouldCloseIssueIfClose() {
         List<Issue> expected = new ArrayList<>();
         List<Issue> actual = new ArrayList<>();
-        expected.add(new Issue(2, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel));
-        repository.closeSet(2);
-        actual.add(repository.getById(2));
+        expected.add(issue2);
+        repository.closeIssue(7);
+        actual.add(repository.getById(7));
         assertEquals(expected, actual);
     }
 
     @Test
-    void shouldCloseSetIfOpen() {
+    void shouldCloseIssueIfOpen() {
         List<Issue> expected = new ArrayList<>();
         List<Issue> actual = new ArrayList<>();
-        expected.add(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", false, "20.05.2020", thirdAssigneeSet, thirdLabel));
-        repository.closeSet(3);
-        actual.add(repository.getById(3));
+        expected.add(issue1Close);
+        repository.closeIssue(1);
+        actual.add(repository.getById(1));
         assertEquals(expected, actual);
     }
 
     @Test
-    void shouldOpenSetIfClose() {
+    void shouldOpenIssueIfClose() {
         List<Issue> expected = new ArrayList<>();
         List<Issue> actual = new ArrayList<>();
-        expected.add(new Issue(2, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", true, "", secondAssigneeSet, secondLabel));
-        repository.openSet(2);
-        actual.add(repository.getById(2));
+        expected.add(issue2);
+        repository.openIssue(7);
+        actual.add(repository.getById(7));
         assertEquals(expected, actual);
     }
 
     @Test
-    void shouldOpenSetIfOpen() {
+    void shouldOpenIssueIfOpen() {
         List<Issue> expected = new ArrayList<>();
         List<Issue> actual = new ArrayList<>();
-        expected.add(new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel));
-        repository.openSet(3);
+        expected.add(issue3);
+        repository.openIssue(3);
         actual.add(repository.getById(3));
         assertEquals(expected, actual);
     }

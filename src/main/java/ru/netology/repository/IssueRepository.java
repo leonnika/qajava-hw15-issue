@@ -3,7 +3,6 @@ package ru.netology.repository;
 import ru.netology.domain.Issue;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class IssueRepository {
@@ -26,15 +25,7 @@ public class IssueRepository {
         return items.add(item);
     }
 
-    public boolean remove(Issue item) {
-        return items.remove(item);
-    }
-
-    public boolean addAll(Collection<? extends Issue> items) {
-        return this.items.addAll(items);
-    }
-
-    public void openSet(int id) {
+    public void openIssue(int id) {
         for (Issue item : items) {
             if (item.getId() == id) {
                 item.setOpen(true);
@@ -42,16 +33,12 @@ public class IssueRepository {
         }
     }
 
-    public void closeSet(int id) {
+    public void closeIssue(int id) {
         for (Issue item : items) {
             if (item.getId() == id) {
                 item.setOpen(false);
             }
         }
-    }
-
-    public boolean removeAll(Collection<? extends Issue> items) {
-        return this.items.removeAll(items);
     }
 }
 
