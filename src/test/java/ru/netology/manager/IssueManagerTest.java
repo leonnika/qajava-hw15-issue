@@ -24,8 +24,8 @@ class IssueManagerTest {
     private Issue issue1Open = new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", true, "26.04.2020", fistAssigneeSet, fistLabel);
     private Issue issue1Close = new Issue(1, "Ошибка при создании репозитория", "Сидоров Семён Семёныч", "24.04.2020", false, "26.04.2020", fistAssigneeSet, fistLabel);
     private Issue issue2 = new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", false, "", secondAssigneeSet, secondLabel);
+    private Issue issue2Open = new Issue(7, "Не соответствие типов", "Сидоров Семён Семёныч", "24.05.2020", true, "", secondAssigneeSet, secondLabel);
     private Issue issue3 = new Issue(3, "Ошибка чтения файлов", "Сидоров Семён Семёныч", "06.05.2020", true, "20.05.2020", thirdAssigneeSet, thirdLabel);
-
 
     @Nested
     public class Empty {
@@ -211,6 +211,14 @@ class IssueManagerTest {
             List<Issue> expected = new ArrayList<>();
             expected.addAll(List.of(issue2, issue3, issue1Close));
             manager.updateById(1);
+            assertEquals(expected, manager.getAllIssue());
+        }
+
+        @Test
+        void shouldUpdateByIdForClose() {
+            List<Issue> expected = new ArrayList<>();
+            expected.addAll(List.of(issue2Open, issue3, issue1Open));
+            manager.updateById(7);
             assertEquals(expected, manager.getAllIssue());
         }
     }
